@@ -5,7 +5,7 @@ The game itself is available for free at https://imperialdawn.com
 
 This uses the discord.py library available at https://github.com/Rapptz/discord.py, which is pretty great all things considered, especially for setting up simple bots.
 
-When making a discord bot, be sure that you are trying to log in with your bot's token, not their Client ID or Client secret. You can do so with this code by creating a text file called "token" (not "token.txt", "token.docx", or "token.pdf", just "token") in the same directory as the code, and pasting your token into it without leaving anything in the file.
+When making a discord bot, be sure that you are trying to log in with your bot's token, not their Client ID or Client secret. You can do so with this code by creating a text file called "token" (not "token.txt", "token.docx", or "token.pdf", just "token") in the same directory as the code, and pasting your token into it without leaving anything else in the file.
 
 While not super satisfying to use, the dicebot.sh script will restart your bot after it crashes periodically. This is pragmatic, as errors that I don't yet understand seem to come through sometimes, especially when working over a spotty connection. If not caught, they can crash the entire bot, which is annoying.
 
