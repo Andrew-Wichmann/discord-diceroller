@@ -1,3 +1,14 @@
+#Non-github ignores
+
+#put your discord login token here
+token
+
+#where system logs are placed
+dice.log
+
+#really? All this clutter, and this one wasn't in there?
+*.swp
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
