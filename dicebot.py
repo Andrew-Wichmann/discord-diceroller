@@ -9,8 +9,8 @@ token = open("token", "r").read().strip()
 
 # Global Initializations
 client = discord.Client()
+check_regex = re.compile("roll a (\d{1,3}) die(.*)", re.IGNORECASE)
 # Note that any roll with more than 300ish dice is going to fail to send anyway
-check_regex = re.compile("^[rcy](\d{1,3})(.*)", re.IGNORECASE)
 save_regex = re.compile("^[ns](\d{1,3})(.*)", re.IGNORECASE)
 
 
@@ -32,56 +32,12 @@ async def on_message(message):
     ))
     # Roll a check (success on 3-6)
     if check_regex.match(message.content):
-        m = check_regex.match(message.content)
-        results = ""
-        score = 0
-        for i in range(int(m.group(1))):
-            die = random.randrange(1, 7)
-            if die > 2:
-                score += 1
-                results += " **[{}]**".format(die)
-            else:
-                results += "[{}]".format(die)
-        subject = m.group(2)
-        subject = " re: " + subject if subject else ""
+        m  = check_regex.match(message.content)
+        number = random.randint(1,int(m.group(1)))
         await client.send_message(
-                message.channel,
-                "**{0}** got {1} successes {2} on their **Check**{3}".format(
-                    message.author.display_name,
-                    score,
-                    results,
-                    subject
-                ))
-    # Roll a save (success on 4-6)
-    elif save_regex.match(message.content):
-        m = save_regex.match(message.content)
-        results = ""
-        score = 0
-        for i in range(int(m.group(1))):
-            die = random.randrange(1, 7)
-            if die > 3:
-                score += 1
-                results += " **[{}]**".format(die)
-            else:
-                results += "[{}]".format(die)
-
-        subject = m.group(2)
-        subject = " re: " + subject if subject else ""
-        await client.send_message(
-                message.channel,
-                "**{0}** got {1} successes {2} on their **Save**{3}".format(
-                    message.author.display_name,
-                    score,
-                    results,
-                    subject
-                ))
-    # Mindless trolling
-    elif "now" in message.content.lower():
-        await slow_talk(
-            message,
-            "Now, don't be hasty young @{}.".format(message.author.mention)
+            message.channel,
+            "You rolled a {}".format(number)
         )
-
 
 # Not currently used but I wanted AW to see a fun thing.
 async def slow_talk(message, response):
